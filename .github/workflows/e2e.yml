@@ -29,14 +29,14 @@ jobs:
         npm ci
         npx cypress verify
         npx cypress run
-    # save error screenshots as test artifacts
-    - uses: actions/upload-artifact@master
+    # save any error screenshots as test artifacts
+    - uses: actions/upload-artifact@v1
+      if: failure()
       with:
         name: screenshots
         path: cypress/screenshots
-        if: failure()
     # video should always be generated
-    - uses: actions/upload-artifact@master
+    - uses: actions/upload-artifact@v1
       with:
         name: videos
         path: cypress/videos
