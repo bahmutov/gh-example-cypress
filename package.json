@@ -1,0 +1,23 @@
+{
+  "name": "gh-example-cypress",
+  "version": "1.0.0",
+  "description": "Simple example with Cypress running inside plain GH Action",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahmutov/gh-example-cypress.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bahmutov/gh-example-cypress/issues"
+  },
+  "homepage": "https://github.com/bahmutov/gh-example-cypress#readme",
+  "devDependencies": {
+    "cypress": "3.8.2"
+  }
+}

@@ -1,0 +1,42 @@
+name: Cypress
+
+on: [push]
+
+jobs:
+  e2e:
+    name: Cypress tests
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Cache NPM modules
+      uses: actions/cache@v1
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-npm-
+    - name: Cache Cypress binary
+      uses: actions/cache@v1
+      with:
+        path: ~/.cache/Cypress
+        key: ${{ runner.os }}-cypress-${{ hashFiles('**/package.json') }}
+        restore-keys: |
+          ${{ runner.os }}-cypress-
+    - name: install Cypress and run tests
+      env:
+        CI: 1
+      run: |
+        npm ci
+        npx cypress verify
+        npx cypress run
+    # save error screenshots as test artifacts
+    - uses: actions/upload-artifact@master
+      with:
+        name: screenshots
+        path: cypress/screenshots
+        if: failure()
+    # video should always be generated
+    - uses: actions/upload-artifact@master
+      with:
+        name: videos
+        path: cypress/videos
